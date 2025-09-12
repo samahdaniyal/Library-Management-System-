@@ -1,6 +1,5 @@
 ## Introduction
 
-hehe xdd
 
 In this project, we will work on a simple library management system. This is an MVC application written in C#, using asp.net core and entity framework core for persistence in a SQLite database.
 
