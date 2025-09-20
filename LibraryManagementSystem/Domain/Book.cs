@@ -24,12 +24,12 @@ namespace LibraryManagementSystem.Domain
             // This method should return true if the book is not currently on loan (No entry in Loans collection)
             // or if it was on loan but has been returned (loan.ReturnDate is not null for all Loans)
             // TODO: 1.1 Implement the IsAvailable method
-
-            throw new NotImplementedException("Book.IsAvailable is not implemented");
+            return !Loans.Any(loan => loan.ReturnDate == null);
+            // throw new NotImplementedException("Book.IsAvailable is not implemented");
             // DO NOT MODIFY BELOW THIS LINE
         }
 
-        
+
         // This is an example of leaking presentation logic in Domain model. It has nothing to do with domain.
         // Ideally, this method should be part of presentation layer, perhaps in BookViewModel class.
         public string AuthorsToString()
@@ -40,7 +40,34 @@ namespace LibraryManagementSystem.Domain
             // If the book has only one author, the name should be returned as is or "unknown" if the author's name is null
             // If the book has no authors, an empty string should be returned
             // TODO: 1.2 Implement the AuthorsToString method
-            throw new NotImplementedException("Book.AuthorsToString is not implemented");
+            // throw new NotImplementedException("Book.AuthorsToString is not implemented");
+            // Handle edge cases
+            if (Authors == null || !Authors.Any())
+            {
+                return string.Empty;
+            }
+
+            // Get author names, handling null names
+            var authorNames = Authors
+                .Select(author => string.IsNullOrEmpty(author.Name) ? "unknown" : author.Name)
+                .ToList();
+
+            // Handle single author
+            if (authorNames.Count == 1)
+            {
+                return authorNames[0];
+            }
+
+            // Handle multiple authors: "Author1, Author2 and Author3"
+            if (authorNames.Count == 2)
+            {
+                return $"{authorNames[0]} and {authorNames[1]}";
+            }
+
+            // More than 2 authors
+            var allButLast = string.Join(", ", authorNames.Take(authorNames.Count - 1));
+            var lastAuthor = authorNames.Last();
+            return $"{allButLast} and {lastAuthor}";
             // DO NOT MODIFY BELOW THIS LINE
         }
     }
