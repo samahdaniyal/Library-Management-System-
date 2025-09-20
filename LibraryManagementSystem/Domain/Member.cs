@@ -14,10 +14,10 @@ namespace LibraryManagementSystem.Domain
         public virtual bool CanBorrow()
         {
             // DO NOT MODIFY ABOVE THIS LINE
-            // TODO: 2. return true if the member has less than 3 loans that have not been returned
+            
+            // returning true if the member has less than 3 loans that have not been returned
             var activeLoanCount = Loans.Count(loan => loan.ReturnDate == null);
             return activeLoanCount < 3;
-            // throw new NotImplementedException("Member.CanBorrow is not implemented");
             // DO NOT MODIFY BELOW THIS LINE
         }
 

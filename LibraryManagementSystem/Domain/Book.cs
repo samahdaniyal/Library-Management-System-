@@ -23,9 +23,9 @@ namespace LibraryManagementSystem.Domain
             // DO NOT MODIFY ABOVE THIS LINE
             // This method should return true if the book is not currently on loan (No entry in Loans collection)
             // or if it was on loan but has been returned (loan.ReturnDate is not null for all Loans)
-            // TODO: 1.1 Implement the IsAvailable method
+
+            // Implementing the IsAvailable method
             return !Loans.Any(loan => loan.ReturnDate == null);
-            // throw new NotImplementedException("Book.IsAvailable is not implemented");
             // DO NOT MODIFY BELOW THIS LINE
         }
 
@@ -39,26 +39,27 @@ namespace LibraryManagementSystem.Domain
             // If the book has multiple authors, the names should be separated by commas and the last name should be preceded by 'and'
             // If the book has only one author, the name should be returned as is or "unknown" if the author's name is null
             // If the book has no authors, an empty string should be returned
-            // TODO: 1.2 Implement the AuthorsToString method
-            // throw new NotImplementedException("Book.AuthorsToString is not implemented");
-            // Handle edge cases
+
+            // Implementing the AuthorsToString method
+            
+            // Handling edge cases
             if (Authors == null || !Authors.Any())
             {
                 return string.Empty;
             }
 
-            // Get author names, handling null names
+            // Getting author names, handling null names
             var authorNames = Authors
                 .Select(author => string.IsNullOrEmpty(author.Name) ? "unknown" : author.Name)
                 .ToList();
 
-            // Handle single author
+            // Handling single author
             if (authorNames.Count == 1)
             {
                 return authorNames[0];
             }
 
-            // Handle multiple authors: "Author1, Author2 and Author3"
+            // Handling multiple authors: "Author1, Author2 and Author3"
             if (authorNames.Count == 2)
             {
                 return $"{authorNames[0]} and {authorNames[1]}";
